@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const appSlice = createSlice({
+export const appReducer = createSlice({
      name: "app",
      initialState: {value:0},
      reducers: {
@@ -10,6 +10,7 @@ export const appSlice = createSlice({
      },
 });
 
-export const { incrementByAmount } = appSlice.actions;
+export const { incrementByAmount } = appReducer.actions;
+export default appReducer.reducer;
+
 export const selectApp = (state) => state.app.value;
-export default appSlice.reducer;

@@ -13,13 +13,13 @@ const videoConstraints = {
 function WebcamCapture() {
      const webcamRef = useRef(null);
 
-     const [image, setImage] = useState(null)   
+    //  const [image, setImage] = useState(null)   
 
      //  az useCallback estefade mikonim ke ta vaghti ke reference webcamRef avaz nashode , tabe hamoon natije ghablio bargardoone
      const capture = useCallback(() => {
           const imageSrc = webcamRef.current.getScreenshot();
-          setImage(imageSrc)
-          console.log(imageSrc);
+        //   setImage(imageSrc)
+        //   console.log(imageSrc);
      }, [webcamRef]);
 
      return (
@@ -39,7 +39,7 @@ function WebcamCapture() {
                     fontSize='large'
                />
 
-               <img src={image} alt="captured_image" />
+               {/* <img src={image} alt="captured_image" /> */}
           </div>
      );
 }
