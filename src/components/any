@@ -1,0 +1,10 @@
+                    import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+
+                    const capture = ()=>{
+
+     }
+
+               <RadioButtonUncheckedIcon
+               className='webcamCapture__button'
+               onClick={capture}
+                />
