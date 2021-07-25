@@ -15,7 +15,7 @@ function Chats() {
                .orderBy("timestamp", "desc")
                .onSnapshot((snapshot) =>
                     setPosts(
-                         snapshot.docs.map((docs) => ({
+                         snapshot.doc.map((docs) => ({
                               id: docs.id,
                               data: docs.data(),
                          }))
