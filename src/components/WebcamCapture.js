@@ -1,7 +1,10 @@
-import { useRef,useState } from "react";
+import { useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import { useCallback } from "react";
+import { setCameraImage } from "../features/cameraSlice";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import "./webcamCapture.css";
 
 const videoConstraints = {
      // 250, 400
@@ -11,16 +14,20 @@ const videoConstraints = {
 };
 
 function WebcamCapture() {
+     //  const [image, setImage] = useState(null)
+     const dispatch = useDispatch();
      const webcamRef = useRef(null);
-
-    //  const [image, setImage] = useState(null)   
+     const history = useHistory();
 
      //  az useCallback estefade mikonim ke ta vaghti ke reference webcamRef avaz nashode , tabe hamoon natije ghablio bargardoone
      const capture = useCallback(() => {
           const imageSrc = webcamRef.current.getScreenshot();
-        //   setImage(imageSrc)
-        //   console.log(imageSrc);
-     }, [webcamRef]);
+          dispatch(setCameraImage(imageSrc));
+          // vaghti ke ax capture shod, dg camera neshon nade va preview ax ro neshon bede
+          history.push("/preview");
+          //   setImage(imageSrc)
+          //   console.log(imageSrc);
+     }, [webcamRef, dispatch,history]);
 
      return (
           <div className='webcamCapture'>

@@ -1,11 +1,23 @@
-import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import WebcamCapture from "./components/WebcamCapture";
+import Preview from "./components/Preview";
+import "./app.css";
 
 function App() {
      return (
-          <div className='App'>
-               <h1>let's build snapchat!</h1>
-               <WebcamCapture />
+          <div className='app'>
+               <Router>
+                    <div className='app__body'>
+                         <Switch>
+                              <Route path='/Preview'>
+                                   <Preview />
+                              </Route>
+                              <Route path='/' exact>
+                                   <WebcamCapture />
+                              </Route>
+                         </Switch>
+                    </div>
+               </Router>
           </div>
      );
 }
