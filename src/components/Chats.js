@@ -1,15 +1,15 @@
 import SearchIcon from "@material-ui/icons/Search";
 import { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Avatar } from "@material-ui/core";
-import { selectUser } from "../features/appSlice";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import { resetCameraImage } from "../features/cameraSlice";
+import { selectUser } from "../features/appSlice";
 import { auth, db } from "../utilise/firebase";
 import Chat from "./Chat";
 import "./chats.css";
-import { resetCameraImage } from "../features/cameraSlice";
 
 function Chats() {
      const [posts, setPosts] = useState([]);
@@ -25,18 +25,18 @@ function Chats() {
                .orderBy("timestamp", "desc")
                .onSnapshot((snapshot) =>
                     setPosts(
-                         snapshot.doc.map((docs) => ({
-                              id: docs.id,
-                              data: docs.data(),
+                         snapshot.docs.map((doc) => ({
+                              id: doc.id,
+                              data: doc.data(),
                          }))
                     )
                );
      }, []);
 
-     const takeSnap = ()=>{
-          dispatch(resetCameraImage())
-          history.push('/')
-     }
+     const takeSnap = () => {
+          dispatch(resetCameraImage());
+          history.push("/");
+     };
 
      return (
           <div className='chats'>
@@ -47,7 +47,7 @@ function Chats() {
                          onClick={() => auth.signOut()}
                     />
                     <div className='chats__search'>
-                         <SearchIcon className="chats__searchIcon" />
+                         <SearchIcon className='chats__searchIcon' />
                          <input type='text' placeholder='friends' />
                     </div>
                     <ChatBubbleIcon className='chats_chatIcon' />
@@ -78,10 +78,10 @@ function Chats() {
                </div>
 
                <RadioButtonUncheckedIcon
-               className='chats__takePicIcon'
-               onClick={takeSnap}
-               fontSize='large'
-                />
+                    className='chats__takePicIcon'
+                    onClick={takeSnap}
+                    fontSize='large'
+               />
           </div>
      );
 }

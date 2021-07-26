@@ -1,5 +1,6 @@
 import firebase from "firebase";
 
+// firebase :  snapchat-clone
 const firebaseConfig = {
      apiKey: "AIzaSyDggaYaw1li0MD67aAGk0l3T-yFZ5dOmrg",
      authDomain: "snapchat-clone-6109b.firebaseapp.com",
@@ -13,9 +14,10 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 // database
 const db = firebaseApp.firestore();
 // authentication
-const auth = firebaseApp.auth();
+const auth = firebase.auth();
+// popup auth
 const provider = new firebase.auth.GoogleAuthProvider();
 // storage for uploading
-const storage = firebaseApp.storage();
+const storage = firebase.storage();
 
 export { db, auth, provider, storage };

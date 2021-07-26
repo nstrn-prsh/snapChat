@@ -1,9 +1,9 @@
+import { useDispatch } from "react-redux";
 import { Button } from "@material-ui/core";
 import { auth, provider } from "../utilise/firebase";
-import "./login.css";
-import { useDispatch } from "react-redux";
 import { login } from "../features/appSlice";
 import snapLogo from "./../assets/pnghut_social-media-snapchat-silhouette.png";
+import "./login.css";
 
 function Login() {
      const dispatch = useDispatch();

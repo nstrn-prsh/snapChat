@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { resetCameraImage, selectCameraImage } from "../features/cameraSlice";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import firebase from "firebase";
 import CloseIcon from "@material-ui/icons/Close";
 import TextFieldsIcon from "@material-ui/icons/TextFields";
 import CreateIcon from "@material-ui/icons/Create";
@@ -13,7 +13,7 @@ import CropIcon from "@material-ui/icons/Crop";
 import TimerIcon from "@material-ui/icons/Timer";
 import SendIcon from "@material-ui/icons/Send";
 import { db, storage } from "../utilise/firebase";
-import firebase from "firebase";
+import { resetCameraImage, selectCameraImage } from "../features/cameraSlice";
 import { selectUser } from "../features/appSlice";
 import "./preview.css";
 
@@ -43,14 +43,14 @@ function Preview() {
           // post haro toye storage firebase save mikonim :)
           const uploadTask = storage
                .ref(`posts/${id}`)
-               .putString(cameraImage, "data-url");
+               .putString(cameraImage, "data_url");
 
           // firebase document
           uploadTask.on(
-               "state-changed",
+               "state_changed",
                null,
                (error) => {
-                    console.log(error);
+                    console.log(`sendPost- uploadTask : ${error}`);
                },
                // complete function
                () => {
@@ -92,7 +92,7 @@ function Preview() {
 
                <div className='preview__footer' onClick={sendPost}>
                     <h2>send now</h2>
-                    <SendIcon size='small' className='preview__sendIcon' />
+                    <SendIcon size='large' className='preview__sendIcon' />
                </div>
           </div>
      );

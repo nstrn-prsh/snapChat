@@ -10,7 +10,7 @@ import "./app.css";
 import { useEffect } from "react";
 import { auth } from "./utilise/firebase";
 import { useDispatch } from "react-redux";
-import snapLogo from "./assets/pnghut_social-media-snapchat-silhouette.png";
+// import snapLogo from "./assets/pnghut_social-media-snapchat-silhouette.png";
 
 function App() {
      const user = useSelector(selectUser);
@@ -21,7 +21,7 @@ function App() {
                if (authUser) {
                     dispatch(
                          login({
-                              username: authUser.user.displayName,
+                              username: authUser.user.username,
                               profilePic: authUser.user.photoURL,
                               id: authUser.user.uid,
                          })
