@@ -1,7 +1,7 @@
 .chats {
      position: relative;
-     height: 400px;
-     width: 250px;
+     height: 640px;
+     width: 360px;
 }
 
 .chats__header {
@@ -48,7 +48,7 @@
      border-top-right-radius: 10px;
      background-color: #fff;
      overflow: scroll;
-} 
+}
 
 /* to hide scrollbar */
 .chats__posts::-webkit-scrollbar {
@@ -58,4 +58,30 @@
 .chats__posts {
      -ms-overflow-style: none;
      scrollbar-width: none;
+}
+
+.chats__takePicIcon {
+     position: absolute;
+     background-color: #fff;
+     border-radius: 200px;
+     color: gray;
+     font-size: 40px !important;
+     cursor: pointer;
+     bottom: 0;
+     left: 50%;
+     transform: translate(-50%, -50%);
+}
+
+.chats__takePicIcon:hover{
+     opacity: 0.8;
+}
+
+.chats__searchIcon{
+     color: #fff;
+     font-size: 13px !important;
+}
+
+.chats_chatIcon{
+     color: #fff;
+     font-size: 18px !important;
 }

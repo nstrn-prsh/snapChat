@@ -13,7 +13,7 @@ function Login() {
                .then((result) => {
                     dispatch(
                          login({
-                              username: result.user.displayName,
+                              username: result.user.username,
                               profilePic: result.user.photoURL,
                               id: result.user.uid,
                          })
@@ -25,8 +25,8 @@ function Login() {
      return (
           <div className='login'>
                <div className='login__container'>
-                    <img src={snapLogo} alt='logo' />
-                    <Button variant='outlined ' onClick={signIn}>
+                    <img src={snapLogo} alt='logo'/>
+                    <Button variant='outlined' onClick={signIn}>
                          sign in
                     </Button>
                </div>

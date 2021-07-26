@@ -4,5 +4,25 @@
      align-items: center;
      justify-content: center;
      background-color: #fff176;
-     height: 100vh;
+     height: 100%;
+}
+
+.app__logo {
+     object-fit: contain;
+     height: 100px;
+}
+
+.body__bodyBG {
+     background-color: white;
+     height: 640px;
+}
+
+.app__body {
+     /* background: url("./assets/iphonex.png") no-repeat center; */
+     height:640px;
+     width: 360px;
+     background-size: contain;
+     padding: 12px;
+     z-index: 100 !important;
+     overflow: hidden;
 }

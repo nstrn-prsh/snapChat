@@ -12,12 +12,14 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 import CropIcon from "@material-ui/icons/Crop";
 import TimerIcon from "@material-ui/icons/Timer";
 import SendIcon from "@material-ui/icons/Send";
-import "./preview.css";
 import { db, storage } from "../utilise/firebase";
 import firebase from "firebase";
+import { selectUser } from "../features/appSlice";
+import "./preview.css";
 
 function Preview() {
      const cameraImage = useSelector(selectCameraImage);
+     const user = useSelector(selectUser);
      const dispatch = useDispatch();
 
      const history = useHistory();
@@ -59,9 +61,9 @@ function Preview() {
                          .then((url) => {
                               db.collection("posts").add({
                                    imageUrl: url,
-                                   username: "Nas",
+                                   username: user.username,
                                    read: false,
-                                   // profile pic
+                                   profilePic:user.profilePic,
                                    timestamp:
                                         firebase.firestore.FieldValue.serverTimestamp(),
                               });
