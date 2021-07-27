@@ -3,13 +3,12 @@ import WebcamCapture from "./components/WebcamCapture";
 import Preview from "./components/Preview";
 import Chats from "./components/Chats";
 import ChatView from "./components/ChatView";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { login, logout, selectUser } from "./features/appSlice";
 import Login from "./components/Login";
 import "./app.css";
 import { useEffect } from "react";
 import { auth } from "./utilise/firebase";
-import { useDispatch } from "react-redux";
 // import snapLogo from "./assets/pnghut_social-media-snapchat-silhouette.png";
 
 function App() {
@@ -21,9 +20,10 @@ function App() {
                if (authUser) {
                     dispatch(
                          login({
-                              username: authUser.user.username,
-                              profilePic: authUser.user.photoURL,
-                              id: authUser.user.uid,
+                              // note:
+                              username: authUser.displayName,
+                              profilePic: authUser.photoURL,
+                              id: authUser.uid,
                          })
                     );
                } else {
