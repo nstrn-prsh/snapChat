@@ -12,13 +12,13 @@ function Chat({ id, profilePic, username, timestamp, imageUrl, read }) {
      const history = useHistory();
 
      const open = () => {
-          if (!read) {
+          // if (!read) {
                dispatch(selectImage(imageUrl));
                db.collection("posts")
                     .doc(id)
                     .set({ read: true }, { merge: true });
                history.push("/chats/view");
-          }
+          // }
      };
 
      return (

@@ -13,7 +13,7 @@ import "./chats.css";
 
 function Chats() {
      const [posts, setPosts] = useState([]);
-     const [search, setSearch] = useState([]);
+     const [search, setSearch] = useState("");
 
      const user = useSelector(selectUser);
      const dispatch = useDispatch();
@@ -24,34 +24,29 @@ function Chats() {
      useEffect(() => {
           db.collection("posts")
                .orderBy("timestamp", "desc")
-               .onSnapshot((snapshot) =>
-                    setPosts(
-                         snapshot.docs.map((doc) => ({
-                              id: doc.id,
-                              data: doc.data(),
-                         }))
-                    )
-               );
-     }, []);
+               .get()
+               .then((snapshot) => {
+                    const posts = [];
+                    snapshot.forEach((doc) => {
+                         if (
+                              doc
+                                   .data()
+                                   .username.toLowerCase()
+                                   .includes(search.toLocaleLowerCase())
+                         ) {
+                              const data = doc.data();
+                              const id = doc.id;
+                              posts.push({ data, id });
+                         }
+                    });
+                    setPosts(posts);
+               });
+     }, [search]);
 
      const takeSnap = () => {
           dispatch(resetCameraImage());
           history.push("/");
      };
-
-     const searchFriends = (event) => {
-          const target = event.target.value
-          setSearch(target);
-          console.log(target)
-          posts.forEach(el=>{
-               const value = el.data.username
-               if (value.toLowerCase().includes(target.toLowerCase())){
-              console.log('hi');
-               }else{
-                    console.log('bye');
-               }
-     })
-}
 
      return (
           <div className='chats'>
@@ -67,34 +62,37 @@ function Chats() {
                               type='text'
                               placeholder='friends'
                               value={search}
-                              onChange={(e) => searchFriends(e)}
+                              onChange={(event) =>
+                                   setSearch(event.target.value)
+                              }
                          />
                     </div>
                     <ChatBubbleIcon className='chats_chatIcon' />
                </div>
                <div className='chats__posts'>
-                    {posts.map(
-                         ({
-                              data: {
-                                   profilePic,
-                                   username,
-                                   timestamp,
-                                   imageUrl,
-                                   read,
-                                   id
-                              },
-                         }) => (
-                              <Chat
-                                   key={id}
-                                   id={id}
-                                   profilePic={profilePic}
-                                   username={username}
-                                   timestamp={timestamp}
-                                   imageUrl={imageUrl}
-                                   read={read}
-                              />
-                         )
-                    )}
+                    {posts &&
+                         posts.map(
+                              ({
+                                   id,
+                                   data: {
+                                        profilePic,
+                                        username,
+                                        timestamp,
+                                        imageUrl,
+                                        read,
+                                   },
+                              }) => (
+                                   <Chat
+                                        key={id}
+                                        id={id}
+                                        profilePic={profilePic}
+                                        username={username}
+                                        timestamp={timestamp}
+                                        imageUrl={imageUrl}
+                                        read={read}
+                                   />
+                              )
+                         )}
                </div>
 
                <RadioButtonUncheckedIcon
