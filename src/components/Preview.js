@@ -63,13 +63,17 @@ function Preview() {
                                    imageUrl: url,
                                    username: user.username,
                                    read: false,
-                                   profilePic:user.profilePic,
+                                   profilePic: user.profilePic,
                                    timestamp:
                                         firebase.firestore.FieldValue.serverTimestamp(),
                               });
                               // vaghti send kardim mire to address chats
                               history.replace("/chats");
-                         }); //end of then
+                         })
+                         .catch((error) => {
+                              alert(error);
+                              history.replace("/");
+                         });
                }
           );
      };
