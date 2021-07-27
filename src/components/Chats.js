@@ -13,6 +13,7 @@ import "./chats.css";
 
 function Chats() {
      const [posts, setPosts] = useState([]);
+     const [search, setSearch] = useState([]);
 
      const user = useSelector(selectUser);
      const dispatch = useDispatch();
@@ -38,6 +39,20 @@ function Chats() {
           history.push("/");
      };
 
+     const searchFriends = (event) => {
+          const target = event.target.value
+          setSearch(target);
+          console.log(target)
+          posts.forEach(el=>{
+               const value = el.data.username
+               if (value.toLowerCase().includes(target.toLowerCase())){
+              console.log('hi');
+               }else{
+                    console.log('bye');
+               }
+     })
+}
+
      return (
           <div className='chats'>
                <div className='chats__header'>
@@ -48,20 +63,25 @@ function Chats() {
                     />
                     <div className='chats__search'>
                          <SearchIcon className='chats__searchIcon' />
-                         <input type='text' placeholder='friends' />
+                         <input
+                              type='text'
+                              placeholder='friends'
+                              value={search}
+                              onChange={(e) => searchFriends(e)}
+                         />
                     </div>
                     <ChatBubbleIcon className='chats_chatIcon' />
                </div>
                <div className='chats__posts'>
                     {posts.map(
                          ({
-                              id,
                               data: {
                                    profilePic,
                                    username,
                                    timestamp,
                                    imageUrl,
                                    read,
+                                   id
                               },
                          }) => (
                               <Chat
